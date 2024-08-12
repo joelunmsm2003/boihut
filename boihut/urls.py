@@ -21,7 +21,8 @@ from bookstore.views import about
 from django.conf.urls.static import static
 from django.conf import settings
 from category.views import category
-from bookstore.views import single_book
+
+from bookstore.views import *
 from cart.views import add_to_cart
 from cart.views import cart
 from cart.views import delete_cart_item
@@ -62,6 +63,10 @@ urlpatterns = [
     path("dashboard/view_order/<int:order_id>", view_order, name="view_order"),
     path("dashboard/view_invoice/<int:invoice_id>", view_invoice,name="view_invoice"),
     path('dashboard/change_pwd', change_pwd,name="change_pwd"),
-
+    path('library/<slug:user_slug>',library,name="library"),
+    path('send-book/',send_book,name="send_book"),
+    path('save-book/',save_book,name="save_book"),
+    path('members',members,name="members")
+    
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

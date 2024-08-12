@@ -1,0 +1,32 @@
+<div id="library" class="tabcontent">
+    <div class="row">  
+        {% for book in books %}
+            <div class="col-12 col-md-4 mb-sm-4 book-container" style="position: relative;">
+                <a class="text-decoration-none" href="/book/{{book.slug}}">
+                <div class="book row">
+                    <div class="col-6 col-md-6 image">
+                        <img class="book-image img-fluid" src="{{book.image.url}}" alt="{{book.title}}"/>
+                    </div>
+                    <div class="col-6 col-md-6 description">
+                        <h3>{{book.title}}</h3>
+                        <p>{{book.author}}</p>
+                        <p>{{book.editorial}}, <b>{{book.state}}</b></p>
+                        {% if book.discount  %}
+                        <div class="discount">{{book.discount}} dscto</div>
+                        {% endif %}
+                        <p class="book-price"><b>S/. {{book.price}}</b></p>
+                        
+                        <div class="botones" style="position: absolute; bottom: 0; right: 12px; width:50%; display: none;">
+                        <div class='btn-action'>
+                        <button class="btn btn-primary"  style="width: 100%; margin-bottom: 5px;">Lo quiero</button>
+                        <button class="btn btn-primary btn-no-background"   style="width: 100%;">Ver Detalle</button>  
+                        </div>
+                        </div>
+                        <button class="btn btn-primary btn-mobile-buy">Lo quiero</button>
+                    </div>
+                </div>  
+                        </a>
+            </div>
+        {% endfor %}
+    </div>     
+</div>

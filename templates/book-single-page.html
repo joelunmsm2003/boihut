@@ -6,22 +6,68 @@
 
     <div class="container" style="padding-top:60px; padding-bottom:20px;">
     <div class="row">
-        <div class="col-md-4 col-sm-12">
-        <img src="/media/{{book.image}}" style="height: 529px;"/>
-        </div>
-        <div class="col-md-5">
-            <h3 class="book-title-single">{{book.title}} </h3>
-            <h4 class="book-price-single mt-3">$ {{book.price}}</h4>
-            <div class="row"><div class="col-3 col-md-2 col-sm-6 g-0">
-                <span class="book-default-single align-items-left"> Author:</span>
+        <div id="bookCarousel" class="carousel slide col-md-4 col-sm-12">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
             </div>
-                <div class="col-7 col-md-6 g-0"> <span class="book-author">
-                {{book.author}} </span>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/media/{{ book.image }}" class="d-block w-100 img-fluid" alt="Book Image 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="/media/{{ book.image2}}" class="d-block w-100 img-fluid" alt="Book Image 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="/media/{{ book.image3}}" class="d-block w-100 img-fluid" alt="Book Image 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="/media/{{ book.image4}}" class="d-block w-100 img-fluid" alt="Book Image 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="{{ book.image_google_api}}" class="d-block w-100 img-fluid" alt="Book Image 4">
                 </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        
+        </div>
+        <div class="col-md-5">
+            <h1 class="book-title-single">{{book.title}} </h1>
+            
+            <h5>{{book.author}}</h5>
+            <h5 class="book-price-single mt-3">S/. {{book.price}}</h5>
+            <div class="row g-0 mt-3">
+                <div class="col-3 col-md-5 ">
+                    <span class="book-default-single align-items-left">Editorial :</span>
+                </div>
+                <div class="col-9 col-md-7">
+                    <span class="book-editorial">{{book.editorial}}</span>
+                </div>
+            </div>
+
+            <div class="row g-0 mt-3"><div class="col-3 col-md-5 ">
+                <span class="book-default-single align-items-left">Categoria:</span>
+            </div>
+            <div class="col-9 col-md-7"> <span class="book-author">
+                {{book.category}} </span>
+                </div>
+            </div>
+            <div style="margin-top: 20px;"><h5>Reseña del libro</h5></div>
+            
             <p class="book-short-desc-single mt-3 g-0">
-                {{book.description|truncatewords:21}}
+                {{book.description}}
             </p>
+
+            
 
             <div class="row g-0 pt-4">
             <div class="col">
@@ -31,39 +77,96 @@
               {% if book.stocks <= 0%}
               <button class="btn boihut-addnow-btn btn-disabled"> Out of Stock</button>
               {%elif book.stocks_available is False%}
-               <h3 class="color-red">Product Not Available</h3>
+               <h3 class="color-red">Producto no disponible</h3>
 
               {% else %}
-              <a href="{%url 'add_cart' book.slug%}" class="btn boihut-addnow-btn" >Add to cart</a>
+              <a href="{%url 'add_cart' book.slug%}" class="btn btn-primary btn-no-background" >Lo quiero</a>
               {%endif%}
-
 
 
             </div>
               </div>
 
-                <div class="row g-0 mt-3"><div class="col-3 col-md-2 col-sm-6 g-0">
-                <span class="book-default-single align-items-left">Category:</span>
-            </div>
-                <div class="col-6 col-sm-6 g-0"> <span class="book-author">
-                {{book.category}} </span>
-                </div>
-            </div>
+            
            <div class="row g-0 mt-3">
-               <div class="col-2 col-md-2 g-0"> <span class="book-default-single align-items-left"> Share:</span>
+               <div class="col-2 col-md-3 g-0"> <span class="book-default-single align-items-left"> Compartir:</span>
                </div>
-               <div class="col-6 col-md-4 g-0">
+               <div class="col-6 col-md-8 g-0">
                    <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri }}" target="_blank" rel="noopener"><i class="fa-brands fa-facebook fa-custom"></i></a> <a href="http://twitter.com/intent/tweet/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener"><i class="fa-brands fa-twitter fa-custom"></i>  </a> <a href="https://instagram.com/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram fa-custom"></i> </a> <a href="http://pinterest.com/pin/create/button/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener"> <i class="fa-brands fa-pinterest fa-custom"></i></a> <a href="whatsapp://send?text={{book.title}} available on {{ request.build_absolute_uri }}" target="_blank" rel="noopener"> <i class="fa-brands fa-whatsapp fa-custom"></i></a>
                </div>
            </div>
 
 
         </div>
-        <div class="col-md-3 col-sm-12" style="margin-top: 83px;">
-            <p class="text-danger" style="font-size:14px;font-weight:600px;"><b>Feel free to chat with us</b></p>
-            <div class="sidebar-style"><i class="fa-solid fa-box"></i> 24 hour Delivery</div>
-            <div class="sidebar-style"> <i class="fa-solid fa-truck-clock"></i> Free Shipping</div>
-            <div class="sidebar-style"><i class="fa-solid fa-arrow-rotate-left"></i> 30 Days Refund</div>
+        <div class="col-md-3 col-sm-12 book-detail" style="margin-top: 10px;">
+          
+            
+            <div class="row g-0 mt-3">
+                <div class="col-6 col-md-5 g-0">
+                    <span class="book-default-single align-items-left">Estado:</span>
+                </div>
+                <div class="col-6 col-md-7 g-0">
+                    <span class="book-state">{{book.state}}</span>
+                </div>
+            </div>
+            <div class="row g-0 mt-3">
+                <div class="col-6 col-md-5 g-0">
+                    <span class="book-default-single align-items-left">ISBN:</span>
+                </div>
+                <div class="col-6 col-md-7 g-0">
+                    <span class="book-isbn">{{book.isbn}}</span>
+                </div>
+            </div>
+            <div class="row g-0 mt-3">
+                <div class="col-6 col-md-5 g-0">
+                    <span class="book-default-single align-items-left">Formato:</span>
+                </div>
+                <div class="col-6 col-md-7 g-0">
+                    <span class="book-format">{{book.format}}</span>
+                </div>
+            </div>
+            <div class="row g-0 mt-3">
+                <div class="col-6 col-md-5 g-0">
+                    <span class="book-default-single align-items-left">Año:</span>
+                </div>
+                <div class="col-6 col-md-7 g-0">
+                    <span class="book-year">{{book.year}}</span>
+                </div>
+            </div>
+            <div class="row g-0 mt-3">
+                <div class="col-6 col-md-5 g-0">
+                    <span class="book-default-single align-items-left">Numero de paginas:</span>
+                </div>
+                <div class="col-6 col-md-7 g-0">
+                    <span class="book-pages">{{book.number_pages}}</span>
+                </div>
+            </div>
+            <div class="row g-0 mt-3">
+                <div class="col-6 col-md-5 g-0">
+                    <span class="book-default-single align-items-left">Encuadernacion:</span>
+                </div>
+                <div class="col-6 col-md-7 g-0">
+                    <span class="book-binding">{{book.binding}}</span>
+                </div>
+            </div>
+            <div class="row g-0 mt-3">
+                <div class="col-6 col-md-5 g-0">
+                    <span class="book-default-single align-items-left">Dimensiones:</span>
+                </div>
+                <div class="col-6 col-md-7 g-0">
+                    <span class="book-dimensions">{{book.dimensions}}</span>
+                </div>
+            </div>
+           
+            <div class="row g-0 mt-3">
+                <div class="col-6 col-md-5 g-0">
+                    <span class="book-default-single align-items-left">Categoria:</span>
+                </div>
+                <div class="col-6 col-md-7 g-0">
+                    <span class="book-category">{{book.category.category_name}}</span>
+                </div>
+            </div>
+           
         </div>
     </div>
 
@@ -92,7 +195,7 @@
 
 <div class="container" style="margin-top:70px;">
     <div class="row text-center">
-    <h3 class="text-front-page  pt-3">Related Books </h3>
+    <h3 class="text-front-page  pt-3">Libros Relacionados </h3>
 
     </div>
 
@@ -105,7 +208,7 @@
              <h3 class="book-title">{{related_book.title}} </h3>
              <p class="book-price"><b>{{related_book.price}}</b></p>
 
-             <button class="btn btn-custom"> Buy Now </button>
+             <button class="btn btn-custom"> Comprar ahora</button>
 
 
 
@@ -128,5 +231,22 @@
 
     </div>
 </section>
+
+<style>
+    .book-detail span {
+        font-size: 0.875rem; /* Tamaño de fuente más pequeño */
+    }
+    @media (max-width: 768px) {
+        .container {
+            display: flex;
+            justify-content: center; /* Centra horizontalmente */
+            align-items: center; /* Centra verticalmente */
+            flex-direction: column; /* Asegura que los elementos hijos se apilen verticalmente */
+        }
+        .row {
+            width: 100%; /* Asegura que la fila ocupe todo el ancho del contenedor */
+        }
+    }
+</style>
 
 {%endblock content%}

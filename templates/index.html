@@ -2,64 +2,157 @@
 
 {%block content%}
 {%load static%}
-<title>Boihut - Buy Books Online</title>
-<section class="background" style="background:url({%static 'images/background.png'%})">
+<title>Amazonas - Buy Books Online</title>
 
 
+<div class="container-full-width">
+    <div class="row">
+        <div class="col-md-2 text-center">
+            <h4 class="text-front-page text-center pt-3 " onclick="toggleCategory()">Categorias </h4>
+            <section class="category">
+            {% for category in categories %}
+                <a class="category-name" href="/category/{{category.slug}}"> {{category.category_name}}</a>
+            {% endfor %}
+            </section>
+        </div>
+        <div class="col-md-10 text-center">
+            <div class="container">
+                <section class="background" style="background:url({%static 'images/background.png'%})"></section>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 p-0 text-center">
+                        <h1 class="boihut display-4"> <span class="boihut-favorite">Busca</span> Libros</h1>
+                        <p class="boihut hero-text">Tienes libros que ya no lees puedes venderlo o intercambiarlo   </p>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <img class="img-fluid" src="https://png.pngtree.com/png-vector/20240518/ourlarge/pngtree-cat-reading-book-png-image_11973750.png"/>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row book-web">
+                <h3 class="text-front-page text-center pt-3 ">Los mejores libros </h3>
+                {% for book in books %}
+                    <div class="col-6 col-md-2 mb-sm-4 book-container" style="position: relative;">
+                        <a class="text-decoration-none" href="book/{{book.slug}}">
+                            <img class="img-fluid book-image" src="{{book.image.url}}" alt="{{book.title}}"/>
+                            <h3>{{book.title}}</h3>
+                            <h5>{{book.author}}</h5>
+                            <p class="book-price"><b>S/. {{book.price}}</b></p>
+                            <div class="botones" style="position: absolute; bottom: 0; left: 0; width: 100%; display: none;">
+                                <button class="btn btn-primary"  style="width: 100%; margin-bottom: 5px;">Lo quiero</button>
+                                <button class="btn btn-primary btn-no-background"   style="width: 100%;">Ver Detalle</button>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>           
+            
+            {% include 'books-movil.html' %}
+
+
+
+            </div>
+        </div>
+    </div>
 </div>
-<div clsss="hero">
-<div class="container">
-<div class="row " style="padding-bottom:124px">
-<div class="col-md-6 p-0">
-    <h1 class="boihut display-4">Buy Your <span class="boihut-favorite">Favorite</span> Books</h1>
-
-  <p class="boihut hero-text">Buy your favorite books from our huge list of collection. You will get your product delivered to your doorsteps in 24 hours. </p>
-  <p class="lead">
-    <a class="btn btn-primary button-buy" href="/category/" role="button">Buy Now</a>
-      <a class="btn btn-primary button-shop" href="/" role="button">Continue</a>
-  </p>
-</div>
-
-<div class="col-12 col-md-4">
-    <img class="img-fluid" src="{%static 'images/hero.png'%}"/>
-
-</div>
-</div></div>
-</div>
-</section>
 
 
 
-    <hr class="align:center"/>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const bookContainers = document.querySelectorAll('.book-container');
 
-<div class="container ms-auto">
-    <div class="row" style="margin-top:-90px;background:#FFFFFF;">
-        <h3 class="text-front-page text-center pt-3 ">Books </h3>
-    {%for book in books%}
+        bookContainers.forEach(container => {
+            container.addEventListener('mouseover', function() {
+                const button = container.querySelector('.botones');
+                button.style.display = 'block';
+            });
 
+            container.addEventListener('mouseout', function() {
+                const button = container.querySelector('.botones');
+                button.style.display = 'none';
+            });
+        });
+    });
 
-         <div class="product-box col-6 col-md-2 mb-sm-4">
-             <a class="text-decoration-none" href="book/{{book.slug}}">
-           <img class="product-img" src="{{book.image.url}}"/>
-            <h3 class="book-title">{{book.title}} </h3>
-            <p class="book-price"><b>৳ {{book.price}}</b></p>
-            <button class="btn btn-custom"> Buy Now </button>
-
-
-
-        </a></div>
-
-
-
-{% endfor %}
-
-</div>
-
-
-
-</div>
+    function toggleCategory() {
+        var categorySection = document.querySelector('.category');
+        if (categorySection.style.display === 'none' || categorySection.style.display === '') {
+            categorySection.style.display = 'block';
+        } else {
+            categorySection.style.display = 'none';
+        }
+    }
 
 
+</script>
+
+<style>
+     .container-full-width {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center;
+    }
+    .book-image {
+        height: 200px; /* Ajusta esta altura según tus necesidades */
+        width: 100%;
+        object-fit: cover; /* Mantiene la proporción de la imagen */
+    }
+    .category-name {
+        font-size: 1em;
+        font-weight: bold;
+        margin: 10px 0;
+        padding: 10px;
+        background-color: #f8f9fa; /* Color de fondo claro */
+        border-radius: 5px; /* Bordes redondeados */
+        transition: background-color 0.3s ease; /* Transición suave */
+        width: 100%;
+        display: block;
+        text-decoration: none;
+    }
+    #library {
+            display: none; /* Oculta la sección de libros en dispositivos móviles */
+    }
+   
+    .category-name:hover {
+        background-color: #e2e6ea; /* Color de fondo al pasar el ratón */
+    }
+
+    @media (max-width: 768px) {
+        
+        .row {
+            width: 100%; /* Asegura que la fila ocupe todo el ancho del contenedor */
+        }
+        
+        .category {
+            display: none; /* Oculta la sección de categorías en dispositivos móviles */
+        }
+        .category-title {
+            cursor: pointer; /* Cambia el cursor a pointer para indicar que es clicable */
+        }
+
+        .book-web {
+            display: none; /* Oculta la sección de libros en dispositivos móviles */
+        }
+        #library {
+            display: block; /* Oculta la sección de libros en dispositivos móviles */
+            display: flex;
+            justify-content: center; /* Centra horizontalmente */
+            align-items: center; /* Centra verticalmente */
+            flex-direction: column; /* Asegura que los elementos hijos se apilen verticalmente */
+        }
+        .book-container {
+            margin-bottom: 20px;
+        }	
+    }
+    
+</style>
 
 
 {%endblock content%}

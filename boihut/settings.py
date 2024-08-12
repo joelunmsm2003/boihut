@@ -15,6 +15,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+print(BASE_DIR)
+
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 
@@ -89,7 +91,7 @@ AUTH_USER_MODEL  = 'accounts.Account'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite5',
     }
 }
 
@@ -140,6 +142,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -150,7 +153,10 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 
 }
+
+'''
 if 'DATABASE_URL' in os.environ:
     import dj_database_url
     DATABASES = {'default': dj_database_url.config()}
 
+'''

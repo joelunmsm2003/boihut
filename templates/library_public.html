@@ -1,0 +1,466 @@
+{% extends 'base.html'%}
+
+{%block content%}
+{%load static%}
+<title>Amazonas</title>
+
+<div class="container">
+    <div class="cover-image">
+        <img src="https://i.pinimg.com/564x/61/e9/7c/61e97c50e0cd596f0f0c9672e6e88b6e.jpg" alt="Cover Photo" class="cover-image">
+        <div class="profile-header">
+            <img src="{{user.image.url}}" alt="Profile Picture" class="profile-picture">
+            
+        </div>
+       
+    </div>
+    <div class="information">
+        <div class="information-content">
+            <h4 class="name"> {{user.first_name|capfirst }}</h4>
+            <p class="bio">Software Engineer</p>
+            <div class="info">
+                <p>{{user.information}}</p>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'profile-container')">Información</button>
+        <button class="tablinks" onclick="openTab(event, 'library')">Biblioteca</button>
+    </div>
+
+        <div id="profile-container" class="tabcontent">
+            <div class="profile-content">
+                <div class="profile-posts">
+                    <h2>Publicaciones</h2>
+                    <div class="post">
+                        <p class="post-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nunc nec nunc.</p>
+                        <div class="post-actions">
+                            <button class="like-button">Like</button>
+                            <button class="comment-button">Comment</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    
+
+        {% include 'books-movil.html' %}
+
+    
+   
+
+   
+    
+
+    
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        console.log(tabName);
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("defaultOpen").click();
+        });
+
+
+        
+    
+</script>
+
+<style>
+    
+    .discount {
+    background-color: #F39C12; /* Fondo amarillo mostaza para descuentos */
+    color: #333; /* Texto oscuro para buen contraste */
+    font-weight: bold; /* Texto en negrita */
+    padding: 4px; /* Espaciado interno */
+    border-radius: 3px; /* Bordes ligeramente redondeados */
+    text-align: center; /* Centrar el texto */
+    display: inline-block; /* Mostrar como bloque en línea */
+    position: absolute; /* Posicionamiento absoluto */
+    top: 10px; /* Ajusta según sea necesario */
+    right: 10px; /* Ajusta según sea necesario */
+    width: 50px; /* Ancho fijo */
+    height: 50px; /* Alto fijo */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para efecto de etiqueta */
+    font-size: 13px;
+}
+
+.discount::before {
+    content: "";
+    position: absolute;
+    bottom: -10px; /* Ajusta según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #F39C12; /* Mismo color que el fondo del descuento */
+}
+
+.discount::after {
+    content: "";
+    position: absolute;
+    bottom: -15px; /* Ajusta según sea necesario */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px; /* Ancho del hueco */
+    height: 4px; /* Alto del hueco */
+    background-color: #ECF0F1; /* Color del hueco, debe coincidir con el fondo del contenedor */
+    border-radius: 50%; /* Para hacer el hueco redondo */
+}
+    .container {
+        position: relative;
+        
+    }
+
+    .book-image {
+        height: 200px; /* Ajusta esta altura según tus necesidades */
+        width: 100%;
+        object-fit: cover;
+        
+    }
+    .book-price {
+        font-size: 22px;
+        font-weight: bold;
+        color: #333;
+    }
+
+
+    .cover-image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        image-rendering: -webkit-optimize-contrast; /* Mejora la calidad en navegadores basados en WebKit */
+        image-rendering: crisp-edges; /* Mejora la calidad en otros navegadores */
+        position: relative;
+    }
+
+    .tabcontent {
+            display: none;
+        }
+        .tablinks.active {
+            background-color: #ccc;
+        }
+
+    .tab {
+        overflow: hidden;
+        background-color: #f1f1f1;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+    }
+
+    .tab button:hover {
+        background-color: #ddd;
+    }
+
+    .tab button.active {
+        background-color: #2C3E50;
+        color: white;
+    }
+
+    .profile-header {
+        position: absolute;
+        bottom: -68px;
+        left: 0;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        color: white; /* Texto blanco para contraste */
+
+        
+        
+    }
+
+    .profile-picture {
+        border-radius: 50%;
+        margin-right: 10px;
+        width: 50px; /* Ajusta el tamaño según sea necesario */
+        height: 50px; /* Ajusta el tamaño según sea necesario */
+    }
+
+    
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 70px;
+    }
+
+   
+
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+
+    .profile-name {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    .profile-bio {
+        font-size: 16px;
+        color: gray;
+        margin-bottom: 10px;
+    }
+
+    .profile-info {
+        margin-bottom: 20px;
+    }
+
+    .profile-info h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .profile-posts {
+        margin-bottom: 20px;
+    }
+
+    .profile-posts h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .post {
+        margin-bottom: 10px;
+    }
+
+    .post-content {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .post-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    .like-button,
+    .comment-button {
+        padding: 5px 10px;
+        border: none;
+        background-color: lightgray;
+        cursor: pointer;
+    }
+
+    .like-button:hover,
+    .comment-button:hover {
+        background-color: gray;
+        color: white;
+    }
+    .overlay-text {
+        position: absolute;
+        bottom: 10px; /* Ajusta según sea necesario */
+        right: 10px; /* Ajusta según sea necesario */
+        background-color: rgba(0, 0, 0, 0.3); /* Fondo semitransparente */
+        color: white;
+        padding: 10px 20px; /* Más espacio para parecer una cita */
+        border-radius: 10px; /* Bordes más redondeados */
+        text-align: center;
+        font-size: 20px; /* Tamaño de fuente ajustado */
+        font-style: italic; /* Estilo de fuente en cursiva */
+        font-family: 'Georgia', serif; /* Fuente de estilo de cita */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para darle profundidad */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra del texto para efecto de iluminación */
+  
+    }
+    /* Botón de compra para móviles */
+    .btn-mobile-buy {
+        display: none; /* Oculto por defecto */
+        width: 100%;
+        margin-top: 10px;
+    }
+    .overlay-text span {
+        color: yellow; /* Color diferente para el span */
+        font-weight: bold; /* Negrita para el span */
+        text-shadow: 2px 2px 4px rgba(255, 255, 0, 0.7); /* Sombra diferente para el span */
+    }
+
+    .description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px;
+    color: black;
+}
+
+#library {
+        margin-top: 12px;
+        display: flex;
+    justify-content: center;
+    margin-left: 12px;
+    flex-direction: column; /* Si quieres centrar verticalmente también */
+    height: 100%;
+    }
+    .information-content {
+        
+        margin-top: 52px;
+        margin-left: 20px;
+    }
+    
+@media (max-width: 768px) {
+    .btn-mobile-buy {
+        display: block;
+    }
+    .image {
+        padding: 12px;
+    }
+
+    .btn-action {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .book-image {
+    height: 200px; /* Ajusta esta altura según tus necesidades */
+    width: 100%; /* Ajusta el ancho al 100% del contenedor */
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border-radius:2px
+}
+
+.book-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.book {
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+
+    
+
+    .container {
+        width: 100%; /* Abarca todo el ancho */
+        padding: 0; /* Elimina el padding */
+        margin: 0; /* Elimina el margen */
+        font-size: 14px;
+    }
+
+    .cover-image {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        image-rendering: -webkit-optimize-contrast; /* Mejora la calidad en navegadores basados en WebKit */
+        image-rendering: crisp-edges; /* Mejora la calidad en otros navegadores */
+        position: relative;
+    }
+  .profile-container {
+    margin-top: 18px;
+    padding: 18px;
+  }
+
+  .profile-header {
+    margin-bottom: 10px;
+  }
+
+  .profile-picture {
+    width: 110px; /* Un poco más grande */
+    height: 110px; /* Un poco más grande */
+    margin-bottom: 5px;
+    border: 3px solid white; /* Borde blanco */
+    border-radius: 50%; 
+  }
+
+  .profile-name {
+    font-size: 18px;
+    margin-bottom: 3px;
+  }
+
+  .profile-bio {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+
+  .profile-info h2 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .profile-posts h2 {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .post-content {
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+
+  .like-button,
+  .comment-button {
+    padding: 3px 6px;
+    font-size: 12px;
+  }
+
+  .overlay-text {
+    bottom: 5px;
+    right: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+
+  .overlay-text span {
+    font-size: 14px;
+  }
+}
+
+
+    </style>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const bookContainers = document.querySelectorAll('.book-container');
+
+        bookContainers.forEach(container => {
+            container.addEventListener('mouseover', function() {
+                const button = container.querySelector('.botones');
+                button.style.display = 'block';
+            });
+
+            container.addEventListener('mouseout', function() {
+                const button = container.querySelector('.botones');
+                button.style.display = 'none';
+            });
+        });
+    });
+</script>
+
+
+
+
+{%endblock content%}

@@ -1,0 +1,64 @@
+{% extends 'base.html'%}
+
+{%block content%}
+{%load static%}
+<title></title>
+
+
+
+
+<div class="container ms-auto">
+    <div class="row">
+        <h3 class="text-front-page text-center pt-3 ">Miembros </h3>
+        {% for account in accounts %}
+            <div class="col-12 col-md-2 mb-sm-4 member-container " style="position: relative;">
+                <a class="text-decoration-none" href="library/{{account.username}}">
+                    <img class="img-fluid member-image" src="{{account.image.url}}" alt="{{account.username}}"/>
+                    <div></div>
+                    <div class="member-name"><h3>{{account.first_name|capfirst}}</h3></div>
+                    
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const bookContainers = document.querySelectorAll('.book-container');
+
+        bookContainers.forEach(container => {
+            container.addEventListener('mouseover', function() {
+                const button = container.querySelector('.botones');
+                button.style.display = 'block';
+            });
+
+            container.addEventListener('mouseout', function() {
+                const button = container.querySelector('.botones');
+                button.style.display = 'none';
+            });
+        });
+    });
+</script>
+
+
+<style>
+    .member-container {
+        cursor: pointer;
+        text-align: center; /* Centra el texto horizontalmente */
+       
+    }
+
+    .member-image {
+    width: 150px; /* Ajusta el tamaño según sea necesario */
+    height: 150px; /* Ajusta el tamaño según sea necesario */
+    border-radius: 50%; /* Hace que la imagen sea circular */
+    object-fit: cover; /* Asegura que la imagen se recorte correctamente dentro del contenedor circular */
+}
+.member-name {
+    text-align: center; /* Centra el texto horizontalmente */
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+}
+</style>
+
+{%endblock content%}
