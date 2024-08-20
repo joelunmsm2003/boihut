@@ -6,7 +6,7 @@
 
     <div class="container" style="padding-top:60px; padding-bottom:20px;">
     <div class="row">
-        <div id="bookCarousel" class="carousel slide col-md-4 col-sm-12">
+        <div id="bookCarousel" class="carousel slide col-md-2 col-sm-12">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#bookCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -15,8 +15,9 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="/media/{{ book.image }}" class="d-block w-100 img-fluid" alt="Book Image 1">
+                    <img src="{{ book.image_google_api}}" class="d-block w-100 img-fluid" alt="Book Image 1">
                 </div>
+                <!--
                 <div class="carousel-item">
                     <img src="/media/{{ book.image2}}" class="d-block w-100 img-fluid" alt="Book Image 2">
                 </div>
@@ -28,7 +29,7 @@
                 </div>
                 <div class="carousel-item">
                     <img src="{{ book.image_google_api}}" class="d-block w-100 img-fluid" alt="Book Image 4">
-                </div>
+                </div>-->
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -38,77 +39,10 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-        
-        </div>
-        <div class="col-md-5">
-            <h1 class="book-title-single">{{book.title}} </h1>
-            
-            <h5>{{book.author}}</h5>
-            <h5 class="book-price-single mt-3">S/. {{book.price}}</h5>
-            <div class="row g-0 mt-3">
-                <div class="col-3 col-md-5 ">
-                    <span class="book-default-single align-items-left">Editorial :</span>
-                </div>
-                <div class="col-9 col-md-7">
-                    <span class="book-editorial">{{book.editorial}}</span>
-                </div>
-            </div>
-
-            <div class="row g-0 mt-3"><div class="col-3 col-md-5 ">
-                <span class="book-default-single align-items-left">Categoria:</span>
-            </div>
-            <div class="col-9 col-md-7"> <span class="book-author">
-                {{book.category}} </span>
-                </div>
-            </div>
-            <div style="margin-top: 20px;"><h5>Reseña del libro</h5></div>
-            
-            <p class="book-short-desc-single mt-3 g-0">
-                {{book.description}}
-            </p>
 
             
-
-            <div class="row g-0 pt-4">
-            <div class="col">
-
-
-
-              {% if book.stocks <= 0%}
-              <button class="btn boihut-addnow-btn btn-disabled"> Out of Stock</button>
-              {%elif book.stocks_available is False%}
-               <h3 class="color-red">Producto no disponible</h3>
-
-              {% else %}
-              <a href="{%url 'add_cart' book.slug%}" class="btn btn-primary btn-no-background" >Lo quiero</a>
-              {%endif%}
-
-
-            </div>
-              </div>
-
             
-           <div class="row g-0 mt-3">
-               <div class="col-2 col-md-3 g-0"> <span class="book-default-single align-items-left"> Compartir:</span>
-               </div>
-               <div class="col-6 col-md-8 g-0">
-                   <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri }}" target="_blank" rel="noopener"><i class="fa-brands fa-facebook fa-custom"></i></a> <a href="http://twitter.com/intent/tweet/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener"><i class="fa-brands fa-twitter fa-custom"></i>  </a> <a href="https://instagram.com/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram fa-custom"></i> </a> <a href="http://pinterest.com/pin/create/button/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener"> <i class="fa-brands fa-pinterest fa-custom"></i></a> <a href="whatsapp://send?text={{book.title}} available on {{ request.build_absolute_uri }}" target="_blank" rel="noopener"> <i class="fa-brands fa-whatsapp fa-custom"></i></a>
-               </div>
-           </div>
-
-
-        </div>
-        <div class="col-md-3 col-sm-12 book-detail" style="margin-top: 10px;">
-          
             
-            <div class="row g-0 mt-3">
-                <div class="col-6 col-md-5 g-0">
-                    <span class="book-default-single align-items-left">Estado:</span>
-                </div>
-                <div class="col-6 col-md-7 g-0">
-                    <span class="book-state">{{book.state}}</span>
-                </div>
-            </div>
             <div class="row g-0 mt-3">
                 <div class="col-6 col-md-5 g-0">
                     <span class="book-default-single align-items-left">ISBN:</span>
@@ -130,7 +64,7 @@
                     <span class="book-default-single align-items-left">Año:</span>
                 </div>
                 <div class="col-6 col-md-7 g-0">
-                    <span class="book-year">{{book.year}}</span>
+                    <span class="book-year">{{book.published_date}}</span>
                 </div>
             </div>
             <div class="row g-0 mt-3">
@@ -166,8 +100,89 @@
                     <span class="book-category">{{book.category.category_name}}</span>
                 </div>
             </div>
-           
+        
         </div>
+        <div class="col-md-10">
+            <h1 class="book-title-single">{{book.title}} </h1>
+            
+            <h5>{{book.author}}</h5>
+            <!--<h5 class="book-price-single mt-3">S/. {{book.price}}</h5>-->
+            <div class="row g-0 mt-3">
+                <div class="col-3 col-md-2 ">
+                    <span class="book-default-single align-items-left">Editorial :</span>
+                </div>
+                <div class="col-9 col-md-3">
+                    <span class="book-editorial">{{book.publisher}}</span>
+                </div>
+            </div>
+
+            <div class="row g-0 mt-3"><div class="col-3 col-md-5 ">
+                <span class="book-default-single align-items-left">Categoria:</span>
+            </div>
+            <div class="col-9 col-md-7"> <span class="book-author">
+                {{book.category}} </span>
+                </div>
+            </div>
+            <div style="margin-top: 20px;"><h5>Reseña del libro</h5></div>
+            
+            <p class="book-short-desc-single mt-3 g-0">
+                {{book.description}}
+            </p>
+
+            
+
+            <div class="row g-0 pt-4">
+            <div class="col">
+
+
+
+              {% if book.stocks <= 0%}
+              <button class="btn boihut-addnow-btn btn-disabled"> Out of Stock</button>
+              {%elif book.stocks_available is False%}
+               <h3 class="color-red">Producto no disponible</h3>
+
+              {% else %}
+              <a href="/add-lo-quiero/{{book.isbn}}" class="btn btn-primary btn-no-background" >Lo quiero</a>
+            <a href="/add-ihave/{{book.isbn}}" class="btn btn-no-primary" style="border: 1px solid black;">Ya lo tengo</a>
+            <a href="/add-iloveyou/{{book.isbn}}" class="btn btn-no-primary" style="border: 1px solid black;">Lo amo</a>
+              
+              {%endif%}
+
+              <h1>Usuarios que tienen este libro</h1>
+              <p>Hasle una buena oferta para que puedas adquirir el libro</p>
+
+              <div class="container ms-auto">
+                <div class="row">
+                   
+                    {% for account in accounts %}
+                        <div class="col-12 col-md-2 mb-sm-4 member-container " style="position: relative;">
+                            <a class="text-decoration-none" href="library/{{account.username}}">
+                                <img class="img-fluid member-image" src="{{account.image.url}}" alt="{{account.username}}"/>
+                                <div></div>
+                                <div class="member-name"><h3>{{account.first_name|capfirst}}</h3></div>
+                                
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+
+            </div>
+              </div>
+
+            
+           <div class="row g-0 mt-3">
+               <div class="col-2 col-md-3 g-0"> <span class="book-default-single align-items-left"> Compartir:</span>
+               </div>
+               <div class="col-6 col-md-8 g-0">
+                   <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri }}" target="_blank" rel="noopener"><i class="fa-brands fa-facebook fa-custom"></i></a> <a href="http://twitter.com/intent/tweet/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener"><i class="fa-brands fa-twitter fa-custom"></i>  </a> <a href="https://instagram.com/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram fa-custom"></i> </a> <a href="http://pinterest.com/pin/create/button/?url={{ request.build_absolute_uri }}" target="_blank" rel="noopener"> <i class="fa-brands fa-pinterest fa-custom"></i></a> <a href="whatsapp://send?text={{book.title}} available on {{ request.build_absolute_uri }}" target="_blank" rel="noopener"> <i class="fa-brands fa-whatsapp fa-custom"></i></a>
+               </div>
+           </div>
+
+
+        </div>
+       
     </div>
 
         <div class="row" style="margin-top:53px"><div class="col-9">
@@ -233,7 +248,7 @@
 </section>
 
 <style>
-    .book-detail span {
+    .carousel span {
         font-size: 0.875rem; /* Tamaño de fuente más pequeño */
     }
     @media (max-width: 768px) {

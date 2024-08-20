@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import Book
+from .models import Book,BookTemplate
+
+
+class BookTemplateAdmin(admin.ModelAdmin):
+    list_display = ('title','author','stocks_available','origen','publisher')
+    list_filter = ('publisher',)
+    search_fields = ('title','author')
+    display_links = ('title','author')
+    readonly_fields = ('created_on',)
 
 # Register your models here.
 class BookAdmin(admin.ModelAdmin):
@@ -14,3 +22,4 @@ class BookAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Book,BookAdmin)
+admin.site.register(BookTemplate,BookTemplateAdmin)

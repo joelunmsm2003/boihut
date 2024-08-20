@@ -37,12 +37,12 @@
                 {% for book in books %}
                     <div class="col-6 col-md-2 mb-sm-4 book-container" style="position: relative;">
                         <a class="text-decoration-none" href="book/{{book.slug}}">
-                            <img class="img-fluid book-image" src="{{book.image.url}}" alt="{{book.title}}"/>
-                            <h3>{{book.title}}</h3>
-                            <h5>{{book.author}}</h5>
-                            <p class="book-price"><b>S/. {{book.price}}</b></p>
+                            <img class="img-fluid book-image" src="{{book.image_google_api}}" alt="{{book.title}}"/>
+                            <h6>{{book.title|slice:":30"}}</h6>
+                            <p>{{book.author}}</p>
+                            <!--<p class="book-price"><b>S/. {{book.price}}</b></p>-->
                             <div class="botones" style="position: absolute; bottom: 0; left: 0; width: 100%; display: none;">
-                                <button class="btn btn-primary"  style="width: 100%; margin-bottom: 5px;">Lo quiero</button>
+                                <!--<button class="btn btn-primary"  style="width: 100%; margin-bottom: 5px;">Lo quiero</button>-->
                                 <button class="btn btn-primary btn-no-background"   style="width: 100%;">Ver Detalle</button>
                             </div>
                         </a>

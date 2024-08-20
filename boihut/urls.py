@@ -15,9 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from bookstore.views import home
-from bookstore.views import contact
-from bookstore.views import about
+from bookstore.views import *
 from django.conf.urls.static import static
 from django.conf import settings
 from category.views import category
@@ -66,7 +64,12 @@ urlpatterns = [
     path('library/<slug:user_slug>',library,name="library"),
     path('send-book/',send_book,name="send_book"),
     path('save-book/',save_book,name="save_book"),
-    path('members',members,name="members")
-    
+    path('members',members,name="members"),
+    path('import_books',import_books,name="import_books"),
+    path('add-lo-quiero/<slug:isbn>',add_lo_quiero,name="add_lo_quiero"),
+    path('add-iloveyou/<slug:isbn>',add_iloveyou,name="add_iloveyou"),
+    path('add-ihave/<slug:isbn>',add_ihave,name="add_ihave"),
+    path('import_books_open_library/<slug:author>',import_books_open_library,name="import_books_open_library"),
+    path('import_casa_libros',import_casa_libros,name="import_casa_libros")
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

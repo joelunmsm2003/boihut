@@ -27,6 +27,8 @@
     <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'profile-container')">Información</button>
         <button class="tablinks" onclick="openTab(event, 'library')">Biblioteca</button>
+        <button class="tablinks" onclick="openTab(event, 'iwish')">Libros que deseo</button>
+        <button class="tablinks" onclick="openTab(event, 'iloveyou')">Libros que amo</button>
     </div>
 
         <div id="profile-container" class="tabcontent">
@@ -45,8 +47,26 @@
             </div>
         </div>
     
+        <div id="library" class="tabcontent">
+            <div class="row"> 
+            <h1>Libros que tengo</h1>
+            {% include 'books-movil.html' %}
+            </div>
+        </div>
+        <div id="iwish" class="tabcontent">
+            <div class="row"> 
+            <h1>Libros que desea tener</h1>
+            {% include 'book-iwish.html' %}
+            </div>
+        </div>
+        <div id="iloveyou" class="tabcontent">
+            <div class="row"> 
+                <h1>Libros que amo</h1>
+            {% include 'book_iloveyou.html' %}
+            </div>
+        </div>
 
-        {% include 'books-movil.html' %}
+
 
     
    
